@@ -1,13 +1,16 @@
 package com.platonique
 
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import com.platonique.plugins.*
+import com.platonique.db.DatabaseFactory
+import com.platonique.plugins.configureMonitoring
+import com.platonique.plugins.configureRouting
+import com.platonique.plugins.configureSerialization
+import io.ktor.server.application.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        configureRouting()
-        configureSerialization()
-        configureMonitoring()
-    }.start(wait = true)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+
+fun Application.module() {
+    DatabaseFactory.init()
+    configureRouting()
+    configureSerialization()
+    configureMonitoring()
 }
