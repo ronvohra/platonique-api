@@ -12,7 +12,7 @@ val postgres_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.6.21"
-    kotlin("plugin.serialization") version "1.6.20"
+    kotlin("plugin.serialization") version "1.6.21"
     id("org.jetbrains.kotlinx.kover") version "0.5.0"
 }
 
@@ -44,7 +44,7 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
-    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
