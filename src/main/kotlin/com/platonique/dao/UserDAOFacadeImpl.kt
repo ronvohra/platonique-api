@@ -1,6 +1,7 @@
 package com.platonique.dao
 
 import com.platonique.db.DatabaseFactory.dbQuery
+import com.platonique.models.Gender
 import com.platonique.models.User
 import com.platonique.models.Users
 import org.jetbrains.exposed.sql.*
@@ -11,6 +12,7 @@ class UserDAOFacadeImpl : UserDAOFacade {
         firstName = row[Users.firstName],
         lastName = row[Users.lastName],
         email = row[Users.email],
+        gender = row[Users.gender],
     )
     override suspend fun getAll(): List<User> = dbQuery {
         Users.selectAll().map(::resultRowToUser)
@@ -23,20 +25,22 @@ class UserDAOFacadeImpl : UserDAOFacade {
             .singleOrNull()
     }
 
-    override suspend fun add(firstName: String, lastName: String, email: String): User? = dbQuery {
+    override suspend fun add(firstName: String, lastName: String, email: String, gender: Gender): User? = dbQuery {
         val insertStatement = Users.insert {
             it[Users.firstName] = firstName
             it[Users.lastName] = lastName
             it[Users.email] = email
+            it[Users.gender] = gender
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToUser)
     }
 
-    override suspend fun update(id: Int, firstName: String, lastName: String, email: String): Boolean = dbQuery {
+    override suspend fun update(id: Int, firstName: String, lastName: String, email: String, gender: Gender): Boolean = dbQuery {
         Users.update({ Users.id eq id }) {
             it[Users.firstName] = firstName
             it[Users.lastName] = lastName
             it[Users.email] = email
+            it[Users.gender] = gender
         } > 0
     }
 
