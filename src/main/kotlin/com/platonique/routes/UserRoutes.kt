@@ -1,6 +1,7 @@
 package com.platonique.routes
 
 import com.platonique.dao.userDao
+import com.platonique.models.Gender
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -33,8 +34,9 @@ fun Route.userRouting() {
             val firstName = call.parameters.getOrFail("firstName")
             val lastName = call.parameters.getOrFail("lastName")
             val email = call.parameters.getOrFail("email")
+            val gender = enumValueOf<Gender>(call.parameters.getOrFail("gender"))
 
-            userDao.add(firstName, lastName, email)
+            userDao.add(firstName, lastName, email, gender)
             call.respondText("User stored correctly", status = HttpStatusCode.Created)
         }
         delete("{id?}") {

@@ -8,6 +8,7 @@ import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.slf4j.LoggerFactory
+import java.net.URI
 import javax.sql.DataSource
 
 object DatabaseFactory {
@@ -24,8 +25,15 @@ object DatabaseFactory {
     }
 
     private fun hikari() = HikariDataSource(HikariConfig().apply {
-        jdbcUrl = System.getenv("JDBC_DATABASE_URL") ?: defaultJdbcUrl
+        jdbcUrl = createJdbcUrl()
     })
+
+    private fun createJdbcUrl(): String {
+        val dbUri = URI(System.getenv("DATABASE_URL") ?: return defaultJdbcUrl)
+        val username = dbUri.userInfo.split(':').toTypedArray()[0]
+        val password = dbUri.userInfo.split(':').toTypedArray()[1]
+        return "jdbc:postgresql://${dbUri.host}:${dbUri.port}${dbUri.path}?requiressl=true&user=${username}&password=${password}&reWriteBatchedInserts=true"
+    }
 
     private fun runFlyway(dataSource: DataSource) {
         val flyway = Flyway.configure()
