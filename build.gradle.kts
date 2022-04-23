@@ -11,7 +11,7 @@ val postgres_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.6.21"
     kotlin("plugin.serialization") version "1.6.21"
     id("org.jetbrains.kotlinx.kover") version "0.5.0"
 }
