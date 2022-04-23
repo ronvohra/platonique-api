@@ -1,1 +1,1 @@
-web: ./build/install/platonique-api/bin/platonique-api
+web: ./build/install/com.platonique.platonique-api/bin/com.platonique.platonique-api
