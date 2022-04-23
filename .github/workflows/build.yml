@@ -33,3 +33,10 @@ jobs:
       uses: codecov/codecov-action@v2
       with:
         files: build/reports/kover/report.xml
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        heroku_email: ${{secrets.MAINTAINER_EMAIL}}
+      if:
+        github.event_name != 'pull_request'
