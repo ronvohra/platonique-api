@@ -50,3 +50,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockito_version")
 }
+
+// For Heroku deployment
+tasks {
+    create("stage").dependsOn("installDist")
+}
