@@ -1,7 +1,8 @@
 package com.platonique.routes
 
-import com.platonique.dao.userDao
+import com.platonique.dao.UserRepository
 import com.platonique.models.Gender
+import com.platonique.plugins.inject
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -9,9 +10,11 @@ import io.ktor.server.routing.*
 import io.ktor.server.util.*
 
 fun Route.userRouting() {
+    val repository by inject<UserRepository>()
+
     route("/user") {
         get {
-            val users = userDao.getAll()
+            val users = repository.getAll()
             if (users.isNotEmpty()) {
                 call.respond(users)
             } else {
@@ -24,7 +27,7 @@ fun Route.userRouting() {
                 status = HttpStatusCode.BadRequest
             )
             val user =
-                userDao.get(id.toInt()) ?: return@get call.respondText(
+                repository.get(id.toInt()) ?: return@get call.respondText(
                     "No user with id $id",
                     status = HttpStatusCode.NotFound
                 )
@@ -36,12 +39,12 @@ fun Route.userRouting() {
             val email = call.parameters.getOrFail("email")
             val gender = enumValueOf<Gender>(call.parameters.getOrFail("gender"))
 
-            userDao.add(firstName, lastName, email, gender)
+            repository.add(firstName, lastName, email, gender)
             call.respondText("User stored correctly", status = HttpStatusCode.Created)
         }
         delete("{id?}") {
             val id = call.parameters["id"] ?: return@delete call.respond(HttpStatusCode.BadRequest)
-            userDao.delete(id.toInt())
+            repository.delete(id.toInt())
             call.respondText("User removed correctly", status = HttpStatusCode.Accepted)
         }
     }

@@ -6,18 +6,10 @@ import com.platonique.models.User
 import com.platonique.models.Users
 import org.jetbrains.exposed.sql.*
 
-class UserDAOFacadeImpl : UserDAOFacade {
-    private fun resultRowToUser(row: ResultRow) = User(
-        id = row[Users.id],
-        firstName = row[Users.firstName],
-        lastName = row[Users.lastName],
-        email = row[Users.email],
-        gender = row[Users.gender],
-    )
+class UserRepositoryImpl : UserRepository {
     override suspend fun getAll(): List<User> = dbQuery {
         Users.selectAll().map(::resultRowToUser)
     }
-
     override suspend fun get(id: Int): User? = dbQuery {
         Users
             .select { Users.id eq id }
@@ -47,5 +39,12 @@ class UserDAOFacadeImpl : UserDAOFacade {
     override suspend fun delete(id: Int): Boolean = dbQuery {
         Users.deleteWhere { Users.id eq id } > 0
     }
+
+    private fun resultRowToUser(row: ResultRow) = User(
+        id = row[Users.id],
+        firstName = row[Users.firstName],
+        lastName = row[Users.lastName],
+        email = row[Users.email],
+        gender = row[Users.gender],
+    )
 }
-val userDao: UserDAOFacade = UserDAOFacadeImpl()

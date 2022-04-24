@@ -1,6 +1,7 @@
 package com.platonique
 
 import com.platonique.db.DatabaseFactory
+import com.platonique.plugins.configureDependencyInjection
 import com.platonique.plugins.configureMonitoring
 import com.platonique.plugins.configureRouting
 import com.platonique.plugins.configureSerialization
@@ -10,6 +11,7 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     DatabaseFactory.init()
+    configureDependencyInjection()
     configureRouting()
     configureSerialization()
     configureMonitoring()

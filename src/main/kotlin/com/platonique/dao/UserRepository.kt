@@ -3,7 +3,7 @@ package com.platonique.dao
 import com.platonique.models.Gender
 import com.platonique.models.User
 
-interface UserDAOFacade {
+interface UserRepository {
     suspend fun getAll(): List<User>
     suspend fun get(id: Int): User?
     suspend fun add(firstName: String, lastName: String, email: String, gender: Gender): User?
