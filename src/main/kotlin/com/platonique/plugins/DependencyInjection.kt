@@ -1,19 +1,16 @@
 package com.platonique.plugins
 
 import com.platonique.di.repositoryModule
-import io.ktor.server.application.*
+import org.koin.core.context.GlobalContext.startKoin
 
-fun Application.configureDependencyInjection() {
-    install(Koin) {
-        modules = arrayListOf(
+fun configureDependencyInjection() {
+    startKoin {
+        modules(
 //            databaseModule,
             repositoryModule,
 //            clientModule,
 //            controllersModule,
 //            authenticationModule,
-//            emailModule,
-//            bettingTipsModule,
-//            gsonModule
         )
     }
 }

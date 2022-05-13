@@ -5,7 +5,7 @@ val flywayVersion = "8.5.10"
 val h2Version = "2.1.212"
 val hikariVersion = "5.0.1"
 val junitVersion = "5.8.2"
-val koinVersion = "3.1.6"
+val koinVersion = "3.2.0"
 val logbackVersion = "1.2.11"
 val mockitoVersion = "4.0.0"
 val postgresVersion = "42.3.5"
@@ -14,7 +14,7 @@ plugins {
     application
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.serialization") version "1.6.21"
-    id("org.jetbrains.kotlinx.kover") version "0.5.0"
+    id("org.jetbrains.kotlinx.kover") version "0.5.1"
 }
 
 group = "com.platonique"
@@ -52,6 +52,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+    testImplementation("io.insert-koin:koin-test-junit5:$koinVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoVersion")
 }

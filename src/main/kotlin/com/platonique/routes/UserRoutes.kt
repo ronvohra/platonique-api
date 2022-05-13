@@ -2,12 +2,12 @@ package com.platonique.routes
 
 import com.platonique.dao.UserRepository
 import com.platonique.models.Gender
-import com.platonique.plugins.inject
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
+import org.koin.ktor.ext.inject
 
 fun Route.userRouting() {
     val repository by inject<UserRepository>()
