@@ -8,7 +8,7 @@ val junitVersion = "5.8.2"
 val koinVersion = "3.2.0"
 val logbackVersion = "1.2.11"
 val mockitoVersion = "4.0.0"
-val postgresVersion = "42.3.5"
+val postgresVersion = "42.5.0"
 
 plugins {
     application
