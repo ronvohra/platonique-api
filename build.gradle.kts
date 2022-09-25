@@ -1,20 +1,20 @@
-val ktorVersion = "2.0.1"
-val kotlinVersion = "1.6.21"
-val exposedVersion = "0.38.2"
-val flywayVersion = "8.5.10"
-val h2Version = "2.1.212"
+val ktorVersion = "2.1.1"
+val kotlinVersion = "1.7.10"
+val exposedVersion = "0.39.2"
+val flywayVersion = "9.3.0"
+val h2Version = "2.1.214"
 val hikariVersion = "5.0.1"
-val junitVersion = "5.8.2"
-val koinVersion = "3.2.0"
-val logbackVersion = "1.2.11"
+val junitVersion = "5.9.1"
+val koinVersion = "3.2.1"
+val logbackVersion = "1.4.1"
 val mockitoVersion = "4.0.0"
-val postgresVersion = "42.3.5"
+val postgresVersion = "42.5.0"
 
 plugins {
     application
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.serialization") version "1.6.21"
-    id("org.jetbrains.kotlinx.kover") version "0.5.1"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.serialization") version "1.7.10"
+    id("org.jetbrains.kotlinx.kover") version "0.6.0"
 }
 
 group = "com.platonique"
@@ -49,6 +49,7 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
