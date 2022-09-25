@@ -15,11 +15,10 @@ fun Route.userRouting() {
     route("/user") {
         get {
             val users = repository.getAll()
-            if (users.isNotEmpty()) {
-                call.respond(users)
-            } else {
-                call.respondText("No users found", status = HttpStatusCode.OK)
-            }
+            if (users.isNotEmpty()) call.respond(users) else call.respondText(
+                "No users found",
+                status = HttpStatusCode.OK
+            )
         }
         get("{id?}") {
             val id = call.parameters["id"] ?: return@get call.respondText(
