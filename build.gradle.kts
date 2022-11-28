@@ -1,5 +1,5 @@
 val ktorVersion = "2.1.1"
-val kotlinVersion = "1.7.10"
+val kotlinVersion = "1.7.22"
 val exposedVersion = "0.39.2"
 val flywayVersion = "9.3.0"
 val h2Version = "2.1.214"
